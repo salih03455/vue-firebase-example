@@ -2,10 +2,18 @@
   <v-app>
     <v-toolbar dark class="pink darken-2">
       <v-toolbar-side-icon @click.stop="sideNav = !sideNav" class="hidden-sm-and-up"></v-toolbar-side-icon>
-      <v-toolbar-title>MaxiMeetup</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">MaxiMeetup</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-for="item in menuItems" :key="item.title" class="hidden-xs-only">
-        <v-btn flat>
+      <v-toolbar-items>
+        <v-btn
+          flat
+          v-for="item in menuItems"
+          :key="item.title"
+          class="hidden-xs-only"
+          :to="item.link"
+        >
           <v-icon left>{{item.icon}}</v-icon>
           {{item.title}}
         </v-btn>
@@ -29,6 +37,7 @@
         <v-list-tile
           v-for="item in menuItems"
           :key="item.title"
+          :to="item.link"
         >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -39,7 +48,9 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <main></main>
+    <main>
+      <router-view></router-view>
+    </main>
   </v-app>
 </template>
 
@@ -51,11 +62,11 @@ export default {
     return {
       sideNav: false,
       menuItems: [
-        { title: 'View Meetups', icon: 'supervisor_account' },
-        { title: 'Organize Meetup', icon: 'room' },
-        { title: 'Profile', icon: 'person' },
-        { title: 'Sign up', icon: 'face' },
-        { title: 'Sign in', icon: 'lock_open' }
+        { title: 'View Meetups', icon: 'supervisor_account', link: '/' },
+        { title: 'Organize Meetup', icon: 'room', link: '/meetup/new' },
+        { title: 'Profile', icon: 'person', link: '/profile' },
+        { title: 'Sign up', icon: 'face', link: '/signup' },
+        { title: 'Sign in', icon: 'lock_open', link: '/signin' }
       ]
     }
   }
