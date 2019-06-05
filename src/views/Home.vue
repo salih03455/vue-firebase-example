@@ -10,11 +10,12 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-carousel>
+        <v-carousel style="cursor: pointer">
           <v-carousel-item
             v-for="meetup in meetups"
             :key="meetup.id"
             :src="meetup.imageUrl"
+            @click="onLoadMeetup(meetup.id)"
           >
             <div class="title">
               {{meetup.title}}
@@ -38,6 +39,11 @@ export default {
         { imageUrl: 'https://img-s1.onedio.com/id-54622b6e32abfb2b73ea9d74/rev-0/w-635/listing/f-jpg-webp/s-f471cc6281dc7b71142ac415699de56b93e5361d.webp', id: 'asdasdds2323', title: 'Meetup in İstanbul' },
         { imageUrl: 'https://iasbh.tmgrup.com.tr/8b9609/752/395/212/0/1945/910?u=https://isbh.tmgrup.com.tr/sbh/2018/11/09/dunya-liderleri-pazar-gunu-pariste-toplanacak-1541769911649.jpg', id: 'dfgfgdfgrf4545', title: 'Meetup in Paris' }
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      this.$router.push('/meetups/' + id)
     }
   }
 }
