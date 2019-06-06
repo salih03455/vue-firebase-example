@@ -4,14 +4,14 @@
       <v-flex xs12>
         <v-card>
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-            height="250px"
+            :src="meetup.imageUrl"
+            height="300px"
           >
           </v-img>
           <v-card-title primary-title>
             <div>
-              <div class="headline">Top western road trips</div>
-              <span class="grey--text">21.06.2019</span>
+              <div class="headline">{{ meetup.title }}</div>
+              <span class="grey--text">{{ meetup.date }}</span>
             </div>
           </v-card-title>
           <v-card-text>
@@ -26,3 +26,14 @@
     </v-layout>
   </v-container>
 </template>
+
+<script>
+export default {
+  props: ['id'],
+  computed: {
+    meetup () {
+      return this.$store.getters.loadedMeetup(this.id)
+    }
+  }
+}
+</script>
