@@ -62,7 +62,7 @@ export default {
     return {
       sideNav: false,
       menuItems: [
-        { title: 'View Meetups', icon: 'supervisor_account', link: '/' },
+        { title: 'View Meetups', icon: 'supervisor_account', link: '/meetups' },
         { title: 'Organize Meetup', icon: 'room', link: '/meetup/new' },
         { title: 'Profile', icon: 'person', link: '/profile' },
         { title: 'Sign up', icon: 'face', link: '/signup' },
