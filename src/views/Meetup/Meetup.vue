@@ -11,11 +11,11 @@
           <v-card-title primary-title>
             <div>
               <div class="headline">{{ meetup.title }}</div>
-              <span class="grey--text">{{ meetup.date }}</span>
+              <span class="grey--text">{{ meetup.date }} - {{ meetup.location }}</span>
             </div>
           </v-card-title>
           <v-card-text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ab sequi delectus doloremque eveniet earum voluptate accusantium placeat minus optio reprehenderit, maiores voluptatum harum quas. Ullam vel eligendi blanditiis fuga possimus dolore ut doloremque nobis voluptatum aliquam, assumenda incidunt pariatur. At, veniam. In consectetur, ex sit sapiente ullam et dolore!
+            {{ meetup.description }}
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
