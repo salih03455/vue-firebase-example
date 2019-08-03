@@ -15,22 +15,29 @@ Vue.filter('date', DateFilter)
 
 Vue.component('app-alert', AlertCmp)
 
-// Firebase Config
-var firebaseConfig = {
-  apiKey: 'AIzaSyDeu28uRXFaVGCew4la1157e_UQ5WX43wU',
-  authDomain: 'devmeetup-7808b.firebaseapp.com',
-  databaseURL: 'https://devmeetup-7808b.firebaseio.com',
-  projectId: 'devmeetup-7808b',
-  storageBucket: 'devmeetup-7808b.appspot.com',
-  messagingSenderId: '796669805254',
-  appId: '1:796669805254:web:d3d5f06804de17a2'
-}
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig)
-
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    // Initialize Firebase
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDeu28uRXFaVGCew4la1157e_UQ5WX43wU',
+      authDomain: 'devmeetup-7808b.firebaseapp.com',
+      databaseURL: 'https://devmeetup-7808b.firebaseio.com',
+      projectId: 'devmeetup-7808b',
+      storageBucket: 'devmeetup-7808b.appspot.com',
+      messagingSenderId: '796669805254',
+      appId: '1:796669805254:web:d3d5f06804de17a2'
+    })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('user var', user)
+        this.$store.dispatch('autoSignIn', user)
+      } else {
+        console.log('user yok')
+      }
+    })
+    this.$store.dispatch('loadMeetups')
+  }
 }).$mount('#app')

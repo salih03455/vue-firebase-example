@@ -18,6 +18,18 @@
           {{item.title}}
         </v-btn>
       </v-toolbar-items>
+
+      <v-toolbar-items v-if="userIsAuthenticated">
+        <v-btn
+          flat
+          class="hidden-xs-only"
+          @click="onLogout"
+        >
+          <v-icon left>exit_to_app</v-icon>
+          Logout
+        </v-btn>
+      </v-toolbar-items>
+
     </v-toolbar>
     <!-- mobilde açılan menü: -->
     <v-navigation-drawer v-model="sideNav" absolute temporary>
@@ -46,6 +58,19 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile
+          v-if="userIsAuthenticated"
+          @click="onLogout"
+        >
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
     <main>
@@ -80,6 +105,11 @@ export default {
     },
     userIsAuthenticated () {
       return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+  },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
     }
   }
 }
