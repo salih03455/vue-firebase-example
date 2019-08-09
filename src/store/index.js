@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/database'
+import 'firebase/storage'
 
 Vue.use(Vuex)
 
@@ -80,22 +81,36 @@ export const store = new Vuex.Store({
       const meetup = {
         title: payload.title,
         location: payload.location,
-        imageUrl: payload.imageUrl,
         description: payload.description,
         date: payload.date.toISOString(), // toISOString() -> firebase bu şekilde kabul ediyor
         creatorId: getters.user.id
       }
+      let imageUrl
+      let key
       firebase.database().ref('meetups').push(meetup)
-        .then((data) => {
-          console.log(data)
-          const key = data.key
-          commit('createMeetup', {
-            ...meetup,
-            id: key
-          })
+        .then(data => {
+          key = data.key
+          const filename = payload.image.name
+          const ext = filename.slice(filename.lastIndexOf('.'))
+          return firebase.storage().ref('meetups/' + key + '.' + ext).put(payload.image)
         })
-        .catch((error) => {
-          console.log(error)
+        .then(fileData => {
+          imageUrl = fileData.metadata.name
+          firebase.storage().ref().child('meetups/' + imageUrl).getDownloadURL()
+            .then(url => {
+              commit('createMeetup', {
+                ...meetup,
+                imageUrl: url,
+                id: key
+              })
+              return firebase.database().ref('meetups').child(key).update({ imageUrl: url })
+            })
+            .catch(error => {
+              console.log('error 1:', error)
+            })
+        })
+        .catch(error => {
+          console.log('error 2:', error)
         })
     },
     signUserUp ({ commit }, payload) {
@@ -116,7 +131,7 @@ export const store = new Vuex.Store({
           error => {
             commit('setLoading', false)
             commit('setError', error)
-            console.log(error)
+            console.log('error 3: ', error)
           }
         )
     },
