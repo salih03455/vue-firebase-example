@@ -97,7 +97,7 @@ export const store = new Vuex.Store({
         title: payload.title,
         location: payload.location,
         description: payload.description,
-        date: payload.date.toISOString(), // toISOString() -> firebase bu şekilde kabul ediyor
+        date: payload.date.toISOString(),
         creatorId: getters.user.id
       }
       let imageUrl

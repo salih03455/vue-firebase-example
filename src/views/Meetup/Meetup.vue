@@ -30,6 +30,10 @@
             </template>
           </v-card-title>
           <v-card-text>
+            <app-edit-meetup-date-dialog :meetup="meetup" v-if="userIsCreator"></app-edit-meetup-date-dialog>
+            <app-edit-meetup-time-dialog :meetup="meetup" v-if="userIsCreator"></app-edit-meetup-time-dialog>
+          </v-card-text>
+          <v-card-text>
             {{ meetup.description }}
           </v-card-text>
           <v-card-actions>
