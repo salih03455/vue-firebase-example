@@ -14,7 +14,7 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-date-picker v-model="editableDate" style="width: 100%" :reactive="true">
-              <template scope="{save, cancel}"> <!-- ? -->
+              <template> <!-- ? -->
                 <v-btn
                   class="blue--text darken-1"
                   flat
@@ -49,9 +49,9 @@ export default {
       const newDay = new Date(this.editableDate).getUTCDate()
       const newMonth = new Date(this.editableDate).getUTCMonth()
       const newYear = new Date(this.editableDate).getUTCFullYear()
-      newDate.setUTCDate(newDay)
-      newDate.setUTCMonth(newMonth)
-      newDate.setUTCFullYear(newYear)
+      newDate.setDate(newDay)
+      newDate.setMonth(newMonth)
+      newDate.setFullYear(newYear)
       const newdate2 = newDate.toISOString()
       this.$store.dispatch('updateMeetupData', {
         id: this.meetup.id,

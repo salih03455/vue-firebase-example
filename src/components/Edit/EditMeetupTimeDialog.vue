@@ -14,7 +14,7 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-time-picker v-model="editableTime" style="width: 100%" :reactive="true" format="24hr">
-              <template scope="{save, cancel}"> <!-- ? -->
+              <template> <!-- ? -->
                 <v-btn
                   class="blue--text darken-1"
                   flat
@@ -50,7 +50,6 @@ export default {
       const minutes = this.editableTime.match(/:(\d+)/)[1]
       newDate.setHours(hours)
       newDate.setMinutes(minutes)
-      debugger;
       this.$store.dispatch('updateMeetupData', {
         id: this.meetup.id,
         date: newDate
@@ -58,16 +57,11 @@ export default {
     }
   },
   created () {
-    let fullTime = new Date(this.meetup.date).toTimeString();
+    let fullTime = new Date(this.meetup.date).toTimeString()
     let hour = fullTime.split(':')[0]
     let minute = fullTime.split(':')[1]
     let time = `${hour}:${minute}`
     this.editableTime = time
-  },
-  watch: {
-    editableTime: function (data) {
-      console.log('data: ', data)
-    }
   }
 }
 </script>
