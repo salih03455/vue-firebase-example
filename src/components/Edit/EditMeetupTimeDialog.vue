@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       editDialog: false,
-      editableTime: '18:45'
+      editableTime: null
     }
   },
   methods: {
