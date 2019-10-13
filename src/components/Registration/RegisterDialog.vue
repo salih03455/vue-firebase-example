@@ -15,7 +15,7 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-card-text>
-              You can always change your decision later on.
+              You can always change your decision later on. (Bilahare tercihini değiştirebilirsin!)
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    userIsRegistered () {
+    userIsRegistered () { // bu meetupa kayıtlı mıyız?
       return this.$store.getters.user.registeredMeetups.findIndex(id => {
         return id === this.meetupId
       }) >= 0

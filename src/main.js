@@ -43,6 +43,7 @@ new Vue({
       if (user) {
         console.log('user var', user)
         this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('fetchUserData')
       } else {
         console.log('user yok')
       }
