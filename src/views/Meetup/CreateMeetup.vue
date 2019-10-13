@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row>
-      <v-flex xs12 sm6 offset-sm3>
+      <v-flex xs12 sm6 offset-md3>
         <h3>Create a new meetup</h3>
       </v-flex>
     </v-layout>
@@ -9,7 +9,7 @@
       <v-flex xs12>
         <form @submit.prevent="onCreateMeetup">
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <v-text-field
                 name="title"
                 label="Title"
@@ -21,7 +21,7 @@
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <v-text-field
                 name="location"
                 label="Location"
@@ -33,7 +33,7 @@
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <v-btn raised class="primary" @click="onPickFile">Upload Image</v-btn>
               <input
                 type="file"
@@ -44,12 +44,12 @@
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <img :src="imageUrl" height="150">
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <v-textarea
                 name="description"
                 label="Description"
@@ -61,22 +61,20 @@
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3 mb-2>
               <h4>Choose a Date & Time</h4>
             </v-flex>
           </v-layout>
-          <v-layout row mb-2>
-            <v-flex xs12 sm6 offset-sm3>
-              <v-date-picker v-model="date"></v-date-picker>
+          <v-layout row wrap mb-3 justify-center fill-height>
+            <v-flex d-flex xs12 md3 text-xs-left ma-2>
+              <v-date-picker v-model="date" full-width></v-date-picker>
+            </v-flex>
+            <v-flex d-flex xs12 md3 text-xs-right ma-2>
+              <v-time-picker v-model="time" format="24hr" full-width></v-time-picker>
             </v-flex>
           </v-layout>
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-              <v-time-picker v-model="time" format="24hr"></v-time-picker>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 offset-md3>
               <v-btn
                 class="primary ml-0"
                 :disabled="!formIsValid"
