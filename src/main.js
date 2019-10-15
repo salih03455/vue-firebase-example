@@ -39,12 +39,12 @@ new Vue({
       messagingSenderId: '796669805254',
       appId: '1:796669805254:web:d3d5f06804de17a2'
     })
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+    firebase.auth().onAuthStateChanged((user) => { // oturum açmış kullanıcı var mı yok mu?
+      if (user) { // varsa
         console.log('user var', user)
         this.$store.dispatch('autoSignIn', user)
         this.$store.dispatch('fetchUserData')
-      } else {
+      } else { // yoksa
         console.log('user yok')
       }
     })
