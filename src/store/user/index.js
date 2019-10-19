@@ -63,24 +63,28 @@ export default {
       commit('setLoading', true)
       commit('clearError')
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
+        .then(user => {
+          const currentUser = firebase.auth().currentUser
+          currentUser.updateProfile({
+            displayName: payload.name
+          }).then(() => {
             commit('setLoading', false)
             const newUser = {
               id: user.user.uid,
+              name: payload.name,
               registeredMeetups: [],
               fbKeys: {}
             }
             commit('setUser', newUser)
-          }
-        )
-        .catch(
-          error => {
-            commit('setLoading', false)
-            commit('setError', error)
-            console.log('error 3: ', error)
-          }
-        )
+          }).catch(error => {
+            console.log('error 4: ', error)
+          })
+        })
+        .catch(error => {
+          commit('setLoading', false)
+          commit('setError', error)
+          console.log('error 3: ', error)
+        })
     },
     signUserIn ({ commit }, payload) {
       commit('setLoading', true)
