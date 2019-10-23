@@ -24,30 +24,32 @@ Vue.component('app-edit-meetup-date-dialog', EditMeetupDateDialog)
 Vue.component('app-edit-meetup-time-dialog', EditMeetupTimeDialog)
 Vue.component('app-meetup-register-dialog', RegisterDialog)
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-  created () {
-    // Initialize Firebase
-    firebase.initializeApp({
-      apiKey: 'AIzaSyDeu28uRXFaVGCew4la1157e_UQ5WX43wU',
-      authDomain: 'devmeetup-7808b.firebaseapp.com',
-      databaseURL: 'https://devmeetup-7808b.firebaseio.com',
-      projectId: 'devmeetup-7808b',
-      storageBucket: 'gs://devmeetup-7808b.appspot.com/',
-      messagingSenderId: '796669805254',
-      appId: '1:796669805254:web:d3d5f06804de17a2'
-    })
-    firebase.auth().onAuthStateChanged((user) => { // oturum açmış kullanıcı var mı yok mu?
-      if (user) { // varsa
-        console.log('user var', user)
-        this.$store.dispatch('autoSignIn', user)
-        this.$store.dispatch('fetchUserData')
-      } else { // yoksa
-        console.log('user yok')
-      }
-    })
-    this.$store.dispatch('loadMeetups')
+// Initialize Firebase
+firebase.initializeApp({
+  apiKey: 'AIzaSyDeu28uRXFaVGCew4la1157e_UQ5WX43wU',
+  authDomain: 'devmeetup-7808b.firebaseapp.com',
+  databaseURL: 'https://devmeetup-7808b.firebaseio.com',
+  projectId: 'devmeetup-7808b',
+  storageBucket: 'gs://devmeetup-7808b.appspot.com/',
+  messagingSenderId: '796669805254',
+  appId: '1:796669805254:web:d3d5f06804de17a2'
+})
+
+// Oturum açmış kullanıcı var mı yok mu?
+firebase.auth().onAuthStateChanged(user => {
+  if (user) { // kullanıcı varsa
+    console.log('user var', user)
+    store.dispatch('autoSignIn', user)
+    store.dispatch('fetchUserData')
+  } else { // kullanıcı yoksa
+    console.log('user yok')
   }
-}).$mount('#app')
+  new Vue({
+    router,
+    store,
+    render: h => h(App),
+    created () {
+      store.dispatch('loadMeetups')
+    }
+  }).$mount('#app')
+})

@@ -29,7 +29,7 @@ export default new Router({
       path: '/meetup/new',
       name: 'CreateMeetup',
       component: CreateMeetup,
-      afterEnter: AuthGuard
+      beforeEnter: AuthGuard
     },
     {
       path: '/meetups/:id',
@@ -41,7 +41,7 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
-      afterEnter: AuthGuard
+      beforeEnter: AuthGuard
     },
     {
       path: '/signup',
